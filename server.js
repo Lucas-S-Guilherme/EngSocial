@@ -73,3 +73,17 @@ app.listen(PORT, () => {
         console.log('Arquivo de dados criado:', DB_FILE);
     }
 });
+
+// rota fraca para visualizar dados salvos
+
+app.get('/admin/data', (req, res) => {
+    // Proteção básica - altere 'senhaadmin' para algo mais seguro
+    if (req.query.secret !== 'senhaadmin') {
+        return res.status(403).send('Acesso negado');
+    }
+    
+    fs.readFile(DB_FILE, (err, data) => {
+        if (err) return res.status(500).send('Erro ao ler dados');
+        res.type('json').send(data);
+    });
+});
